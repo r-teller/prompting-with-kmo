@@ -112,9 +112,11 @@ function App() {
 
   // Generate and copy the shareable link
   const shareFormData = () => {
-    const base64EncodedData = btoa(JSON.stringify(formData.firewall_rules));
+    const base64EncodedData = btoa(JSON.stringify(formData.schema_data));
+    const encodedAssistant = encodeURIComponent(selectedAssistant);
+    const encodedVersion = encodeURIComponent(selectedVersion);
     const currentUrl = window.location.href.split("?")[0];
-    const shareableLink = `${currentUrl}?formData=${base64EncodedData}`;
+    const shareableLink = `${currentUrl}?formData=${base64EncodedData}&assistant=${encodedAssistant}&version=${encodedVersion}`;
 
     navigator.clipboard.writeText(shareableLink).catch((err) => {
       console.error("Failed to copy shareable link: ", err);
@@ -125,7 +127,9 @@ function App() {
   const loadJsonFromModal = async () => {
     try {
       const formData = JSON.parse(modalInputData);
-      setFormData({ firewall_rules: formData });
+      setSelectedAssistant(formData.assistant);
+      setSelectedVersion(formData.version);
+      // setFormData({ firewall_rules: formData });
       toggleModal();
     } catch (err) {
       console.error("Failed to load JSON from clipboard:", err);
@@ -164,11 +168,19 @@ function App() {
   useEffect(() => {
     const parseAndCleanQueryParams = () => {
       const queryParams = new URLSearchParams(window.location.search);
+      const assistantParam = queryParams.get("assistant");
+      const versionParam = queryParams.get("version");
       const formDataParam = queryParams.get("formData");
+      if (assistantParam) {
+        setSelectedAssistant(assistantParam);
+      }
+      if (versionParam) {
+        setSelectedVersion(versionParam);
+      }
       if (formDataParam) {
         try {
           const decodedData = JSON.parse(atob(formDataParam));
-          setFormData({ firewall_rules: decodedData });
+          setFormData({ schema_data: decodedData });
           // Remove the query parameter from the URL
           const newUrl = window.location.pathname;
           window.history.replaceState({}, "", newUrl);
@@ -191,10 +203,17 @@ function App() {
 
   // Toggle modal visibility
   const toggleModal = () => {
+    console.log("Toggle modal", showModal);
     setShowModal(!showModal);
     if (!showModal) {
+      const yamlStr = yamlDump(formData.schema_data, {
+        indent: 2,
+        lineWidth: -1, // Disable line wrapping
+        noRefs: true, // Don't use references
+        sortKeys: false, // Preserve key order
+      });
       // Pre-fill modal with current formData when opening
-      setModalInputData(JSON.stringify(formData.firewall_rules, null, 2));
+      setModalInputData(yamlStr);
     }
   };
 
@@ -304,7 +323,13 @@ function App() {
           <button className="action-button copy-button" onClick={() => copyJsonToClipboard(formData)}>
             <FontAwesomeIcon icon={faCopy} /> Copy
           </button>
-          <button className="action-button view-button">
+          <button
+            className="action-button view-button"
+            onClick={() => {
+              console.log("View button clicked");
+              toggleModal();
+            }}
+          >
             <FontAwesomeIcon icon={faEye} /> View
           </button>
           <button className="action-button reset-button" onClick={resetFormData}>
@@ -313,7 +338,19 @@ function App() {
         </div>
 
         <div className="selector-wrapper">
-          <select className="form-select" value={selectedAssistant} onChange={(e) => setSelectedAssistant(e.target.value)}>
+          <select
+            className="form-select"
+            value={selectedAssistant}
+            onChange={(e) => {
+              const newAssistant = e.target.value;
+              if (newAssistant !== selectedAssistant) {
+                setSelectedVersion("");
+                // Only reset form data if the assistant actually changed
+                resetFormData();
+              }
+              setSelectedAssistant(newAssistant);
+            }}
+          >
             <option value="">Select Assistant Type</option>
             {Object.keys(schemaFolders).map((folder) => (
               <option key={folder} value={folder}>
@@ -325,9 +362,15 @@ function App() {
           <select
             className="form-select"
             value={selectedVersion}
-            onChange={(e) => setSelectedVersion(e.target.value)}
+            onChange={(e) => {
+              const newVersion = e.target.value;
+              if (newVersion !== selectedVersion) {
+                // Only reset form data if the version actually changed
+                resetFormData();
+              }
+              setSelectedVersion(newVersion);
+            }}
             disabled={!selectedAssistant}
-            onClick={resetFormData}
           >
             <option value="">Select Version</option>
             {selectedAssistant &&
@@ -340,10 +383,44 @@ function App() {
 
           {selectedAssistant && selectedVersion && schema && (
             <div className="last-updated">Last Updated: {schema.properties.schema_data.last_updated}</div>
-          
           )}
         </div>
 
+        {/* Modal for editing/viewing JSON */}
+        {showModal && (
+          <div id="myModal" className="modal fade in" role="dialog" style={{ display: "block" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" onClick={toggleModal}>
+                    &times;
+                  </button>
+                  <h4 className="modal-title">Form Data JSON</h4>
+                </div>
+                <div className="modal-body">
+                  <textarea
+                    className="editable-pre"
+                    rows="25"
+                    cols="50"
+                    value={modalInputData}
+                    style={{ whiteSpace: "pre-wrap" }}
+                  />
+                </div>
+                <div className="modal-footer">
+                  <div className="controls-container">
+                    <button type="button" className="btn btn-secondary" onClick={() => copyJsonToClipboard(formData)}>
+                      Copy JSON
+                    </button>
+                    <button type="button" className="btn btn-primary" onClick={toggleModal}>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {showModal && <div className="modal-backdrop fade in"></div>}
         {selectedAssistant && selectedVersion && schema ? (
           <div className="form-content">
             <Form

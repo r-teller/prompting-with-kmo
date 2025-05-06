@@ -1,112 +1,152 @@
-.modal-content {}
+.modal-content {
+  background: #727272;
+  color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
 
 .modal-header,
-.modal-footer {}
+.modal-footer {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #727272;
+}
 
 .modal-body {
-    max-height: calc(100vh - 212px);
-    overflow-y: auto;
+  overflow-y: hidden;
+  background: #727272;
 }
 
 .flex-parent fieldset {
-    display: flex;
-    flex-wrap: wrap;
-    border: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
-
-
+.flex-parent fieldset > legend {
+  color: #FF9800 !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  margin-bottom: 12px !important;
+}
 
 .editable-pre {
-    font-family: monospace;
-    width: 100%;
-    height: auto;
-    min-height: 100px;
-    max-height: calc(100vh - 212px);
-    overflow-y: auto;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 10px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-
+  font-family: monospace;
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  max-height: calc(100vh - 212px);
+  overflow-y: auto;
+  background: #2a343f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: white;
 }
 
 /* Container for the label and the slider */
 .controls-container {
-    display: flex;
-    align-items: center;
-    /* Center items vertically */
-    gap: 10px;
-    /* Space between items */
-    padding: 10px;
-    /* Padding around the container */
+  display: flex;
+  align-items: center;
+  /* Center items vertically */
+  gap: 10px;
+  /* Space between items */
+  padding: 10px;
+  /* Padding around the container */
 }
 
 /* Style for the label */
 .custom-control-label {
-    white-space: nowrap;
-    margin-right: 10px;
-    /* Space between the label and the slider */
+  white-space: nowrap;
+  margin-right: 10px;
+  /* Space between the label and the slider */
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Base style for the slider */
 .custom-control.custom-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    /* Width of the slider */
-    height: 34px;
-    /* Height of the slider */
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  /* Width of the slider */
+  height: 34px;
+  /* Height of the slider */
 }
 
 /* Hide the default checkbox */
 .custom-control-input {
-    opacity: 0;
-    position: absolute;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 /* Style for the slider background */
 .slider-round {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    /* Slider background when off */
-    transition: .4s;
-    border-radius: 34px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Slider background when off */
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
 /* Style for the slider circle */
 .slider-round:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    /* Circle height */
-    width: 26px;
-    /* Circle width */
-    left: 4px;
-    bottom: 2px;
-    /* Adjusted to center the circle vertically */
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 26px;
+  /* Circle height */
+  width: 26px;
+  /* Circle width */
+  left: 4px;
+  bottom: 2px;
+  /* Adjusted to center the circle vertically */
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
 /* Move the slider circle to the right on check */
-.custom-control-input:checked+.slider-round:before {
-    transform: translateX(20px);
+.custom-control-input:checked + .slider-round:before {
+  transform: translateX(20px);
 }
 
 /* Change slider background color when checked */
-.custom-control-input:checked+.slider-round {
-    background-color: #2196F3;
+.custom-control-input:checked + .slider-round {
+  background-color: #4DB6AC;
+}
+
+/* Specific button styling for the modal footer buttons */
+.modal-footer .btn-secondary {
+  background-color: #5C6BC0 !important; /* Copy button color from prompts.css */
+  color: white !important;
+  border: none !important;
+}
+
+.modal-footer .btn-primary {
+  background-color: #26A69A !important; /* View button color from prompts.css */
+  color: white !important;
+  border: none !important;
+}
+
+/* General styling for all buttons in modal-footer */
+.modal-footer .btn {
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  margin: 0 5px !important;
 }
