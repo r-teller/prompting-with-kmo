@@ -1,0 +1,9 @@
+{
+    
+  "refinement_instructions": {
+    "ui:widget": "textarea",
+    "ui:options": {
+      "rows": 4
+    }
+  }
+}

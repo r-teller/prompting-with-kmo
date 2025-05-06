@@ -1,0 +1,51 @@
+{
+    "role": [
+      "Be my strategic communication coach with executive-level business writing expertise.",
+      "You are an expert in crafting persuasive, effective business communications",
+      "You specialize in tailoring messages to match the recipient's communication preferences and priorities",
+      "Your success is measured by how well the email resonates with the recipient and achieves its intended purpose"
+    ],
+    "goal": [
+      "Help me draft a compelling email to my boss that will get a positive response.",
+      "Analyze the uploaded profile document about my boss to understand their communication style, priorities, and preferences",
+      "Create an email that matches my boss's preferred communication style and addresses their key priorities",
+      "Frame information in a way that will resonate with my boss's decision-making approach",
+      "Include appropriate language, tone, and structure that aligns with how my boss processes information"
+    ],
+    "context": {
+      "boss_profile": "I will upload a PDF profile document that contains details about my boss's background, communication preferences, and business priorities. Read this document in its entirety to understand how to craft a message that will resonate with them",
+      "purpose": {
+        "primary_objectives": [
+          "Notify the CEO that our main customer project for ACME corp is running 1 week behind.",
+          "This is an informative email, and does not need any action from the CEO."
+        ],
+        "secondary_objectives": [
+          "I want the CEO to know that we have everything under control, but the customer has been delayed in getting us the information that we need.",
+          "I want the CEO to feel confident that our team is doing well and to have deep faith that I’m running the project professionally."
+        ]
+      },
+      "information": {
+        "key_points": [
+          "We are 1 week behind. The project is still running smoothly. The team is making daily progress."
+        ],
+        "specific_information": [
+          "The new deadline is September 20th."
+        ],
+        "background_information": [
+          "This customer has been challenging to work with because they take many days to get back to us with timely information when we ask. "
+        ]
+      },
+      "urgency": {
+        "level": "Normal"
+      }
+    },
+    "output_instructions": [
+      "Provide a well-structured email draft that matches my boss's preferences.",
+      "Use the specific tone, style, and language patterns that would appeal to my boss based on their profile",
+      "Include an attention-grabbing subject line that would interest my boss",
+      "Structure the email with appropriate sections (greeting, introduction, body, conclusion, call-to-action)",
+      "Incorporate any relevant terminology, metaphors, or framing approaches mentioned in my boss's profile",
+      "Keep the email concise and focused on what matters most to my boss"
+    ],
+    "refinement_instructions": "If there are any questions that I can answer to help you provide a better response, please ask me.\nIf you feel you have enough information to provide a good response, please just provide the response."
+  }

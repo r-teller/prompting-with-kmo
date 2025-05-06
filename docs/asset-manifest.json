@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/prompting-with-kmo/static/css/main.93fcf7c2.css",
+    "main.js": "/prompting-with-kmo/static/js/main.ddcb1391.js",
+    "static/js/30.8e882f94.chunk.js": "/prompting-with-kmo/static/js/30.8e882f94.chunk.js",
+    "static/js/133.55b60a5f.chunk.js": "/prompting-with-kmo/static/js/133.55b60a5f.chunk.js",
+    "static/media/glyphicons-halflings-regular.svg": "/prompting-with-kmo/static/media/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
+    "static/media/glyphicons-halflings-regular.ttf": "/prompting-with-kmo/static/media/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf",
+    "static/media/glyphicons-halflings-regular.woff": "/prompting-with-kmo/static/media/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff",
+    "static/media/glyphicons-halflings-regular.eot": "/prompting-with-kmo/static/media/glyphicons-halflings-regular.5be1347c682810f199c7.eot",
+    "static/media/glyphicons-halflings-regular.woff2": "/prompting-with-kmo/static/media/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2",
+    "index.html": "/prompting-with-kmo/index.html",
+    "main.93fcf7c2.css.map": "/prompting-with-kmo/static/css/main.93fcf7c2.css.map",
+    "main.ddcb1391.js.map": "/prompting-with-kmo/static/js/main.ddcb1391.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93fcf7c2.css",
+    "static/js/main.ddcb1391.js"
+  ]
+}

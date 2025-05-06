@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Email Notification Schema",
+  "version": "1.0.0",
+  "last_updated": "2025-05-01",
+  "type": "object",
+  "properties": {
+    "role": {
+      "title": "Role",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The role of the notification system",
+      "default": [
+        "Act as an automated notification system",
+        "Deliver timely and relevant information to recipients",
+        "Maintain professional and clear communication standards",
+        "Ensure important information is properly highlighted"
+      ]
+    },
+    "goal": {
+      "title": "Goal",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Deliver important notifications to users in a clear and timely manner",
+        "Ensure all critical information is properly conveyed",
+        "Maintain consistent formatting and branding",
+        "Enable recipients to quickly understand the notification's importance and required actions"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "notification_type": {
+          "type": "string",
+          "enum": [
+            "alert",
+            "update",
+            "reminder",
+            "confirmation",
+            "status_change"
+          ],
+          "default": "update"
+        },
+        "purpose": {
+          "type": "object",
+          "properties": {
+            "primary_objectives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "Inform recipient of specific event or update",
+                "Clearly communicate any required actions"
+              ]
+            },
+            "secondary_objectives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "Provide relevant context for the notification",
+                "Include any supplementary information that might be helpful"
+              ]
+            }
+          }
+        },
+        "information": {
+          "type": "object",
+          "properties": {
+            "key_points": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Essential information that must be included in the notification"
+            },
+            "specific_details": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "reference_id": {
+                  "type": "string"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "sender": {
+                  "type": "string"
+                },
+                "priority": {
+                  "type": "string",
+                  "enum": ["high", "medium", "low"]
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "urgency": {
+          "type": "object",
+          "properties": {
+            "urgency_level": {
+              "type": "string",
+              "enum": [
+                "critical",
+                "urgent",
+                "important",
+                "normal",
+                "low"
+              ],
+              "default": "normal"
+            },
+            "expiration": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "output_format": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "description": "The template ID to use for formatting the notification"
+        },
+        "formatting": {
+          "type": "object",
+          "properties": {
+            "html_enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "include_branding": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "delivery_settings": {
+      "type": "object",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["email", "sms", "push", "in_app"]
+          }
+        },
+        "retry_policy": {
+          "type": "object",
+          "properties": {
+            "max_attempts": {
+              "type": "integer",
+              "default": 3
+            },
+            "retry_interval": {
+              "type": "integer",
+              "description": "Retry interval in minutes",
+              "default": 5
+            }
+          }
+        }
+      }
+    }
+  }
+}

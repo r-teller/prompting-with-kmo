@@ -1,0 +1,167 @@
+/* Main container styles */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.selector-container {
+  background: #1C2531;
+  border-radius: 8px;
+  padding: 24px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styling */
+.boss-communication-header {
+  color: #FF9800;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Button styles */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.action-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.share-button {
+  background: #4DB6AC;
+  color: white;
+}
+
+.copy-button {
+  background: #5C6BC0;
+  color: white;
+}
+
+.view-button {
+  background: #26A69A;
+  color: white;
+}
+
+.reset-button {
+  background: #EF5350;
+  color: white;
+}
+
+/* Improved selector wrapper with flexbox */
+.selector-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+/* Style the selects to have appropriate width */
+.form-select {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin-right: 12px;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+/* Style the dropdown options */
+.form-select option {
+  background-color: #121920;
+  color: white;
+  padding: 10px;
+}
+
+/* Style the selected option */
+.form-select option:checked,
+.form-select option:selected {
+  background-color: #3177D7;
+  color: white;
+}
+
+/* Style the hover state */
+.form-select option:hover {
+  background-color: #2A394A;
+}
+
+/* Message when nothing is selected */
+.selection-message {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Last updated text with larger font size */
+.last-updated {
+  color: #FF9800;
+  font-size: 1.1rem;
+  margin-left: auto;
+  white-space: nowrap;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+/* Make sure it wraps properly on mobile */
+@media (max-width: 768px) {
+  .selector-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .form-select {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+  
+  .last-updated {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
+
+/* Form content area */
+.form-content {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 20px;
+}
+
+/* Description field styling */
+.field-description {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.description {
+  margin: 0;
+}
+
+/* Override for legend elements */
+fieldset > legend {
+  color: #FF9800 !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  margin-bottom: 12px !important;
+}

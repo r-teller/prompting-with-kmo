@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Boss Communication Assistant Schema",
+  "version": "1.0.0",
+  "last_updated": "2025-05-05",
+  "type": "object",
+  "properties": {
+    "role": {
+      "title": "Role",
+      "description": "The role of the AI assistant. This is a list of roles that the AI assistant can play.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Be my strategic communication coach with executive-level business writing expertise.",
+        "You are an expert in crafting persuasive, effective business communications",
+        "You specialize in tailoring messages to match the recipient's communication preferences and priorities",
+        "Your success is measured by how well the email resonates with the recipient and achieves its intended purpose",
+        "You understand various executive personality types and their communication preferences",
+        "You are skilled at crisis communication and delivering difficult messages"
+      ]
+    },
+    "goal": {
+      "title": "Goal",
+      "description": "The goal of the AI assistant. This is a list of goals that the AI assistant can achieve.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Help me draft a compelling email to my boss that will get a positive response.",
+        "Analyze the uploaded profile document about my boss to understand their communication style, priorities, and preferences",
+        "Create an email that matches my boss's preferred communication style and addresses their key priorities",
+        "Frame information in a way that will resonate with my boss's decision-making approach",
+        "Include appropriate language, tone, and structure that aligns with how my boss processes information",
+        "Ensure the message maintains professionalism while achieving its objectives",
+        "Help build and maintain a strong professional relationship through effective communication"
+      ]
+    },
+    "context": {
+      "title": "Context",
+      "type": "object",
+      "properties": {
+        "relationship_context": {
+          "title": "Relationship Context",
+          "type": "object",
+          "properties": {
+            "reporting_relationship": {
+              "type": "string",
+              "enum": ["Direct Report", "Matrix Report", "Skip-level", "Peer", "Other"],
+              "default": "Direct Report"
+            },
+            "communication_history": {
+              "type": "string",
+              "description": "Brief description of your previous communication patterns with this executive",
+              "default": "We have weekly 1:1s and communicate via email 2-3 times per week"
+            }
+          }
+        },
+        "boss_profile": {
+          "title": "Boss Profile",
+          "type": "string",
+          "description": "Provide instructions for the AI assistant to best understand how to craft a message that will resonate with my boss, if the profile will be provided externally leave this field as is.",
+          "default": "I will upload a PDF profile document that contains details about my boss's background, communication preferences, and business priorities. Read this document in its entirety to understand how to craft a message that will resonate with them",
+          "example": {
+            "communication_style": "Direct and data-driven",
+            "preferred_format": "Bullet points with supporting data",
+            "decision_making_approach": "Analytical, requires clear ROI",
+            "pet_peeves": "Lengthy emails, lack of preparation"
+          }
+        },
+        "purpose": {
+          "type": "object",
+          "properties": {
+            "desired_outcomes": {
+              "title": "Desired Outcomes",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "Maintain trust and confidence in project leadership",
+                "Get implicit approval for current course of action"
+              ]
+            },
+            "primary_objectives": {
+              "title": "Primary Objectives",
+              "description": "Provide *Primary* instructions for the AI assistant to best understand how to craft a message that will resonate with my boss.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "Notify the CEO that our main customer project for ACME corp is running 1 week behind.",
+                "This is an informative email, and does not need any action from the CEO."
+              ]
+            },
+            "secondary_objectives": {
+              "title": "Secondary Objectives",
+              "description": "Provide *Secondary* instructions for the AI assistant to best understand how to craft a message that will resonate with my boss.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "I want the CEO to know that we have everything under control, but the customer has been delayed in getting us the information that we need.",
+                "I want the CEO to feel confident that our team is doing well and to have deep faith that I'm running the project professionally."
+              ]
+            }
+          }
+        },
+        "information": {
+          "title": "Information",
+          "type": "object",
+          "properties": {
+            "key_points": {
+              "title": "Key Points",
+              "description": "What are the 2-3 most important points you need to communicate?",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "We are 1 week behind. The project is still running smoothly. The team is making daily progress."
+              ]
+            },
+            "specific_information": {
+              "title": "Specific Information",
+              "description": "Are there any specific numbers, dates, or facts that must be included?",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": ["The new deadline is September 20th."]
+            },
+            "background_information": {
+              "title": "Background Information",
+              "description": "Is there any background information your boss needs to understand the context?",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "This customer has been challenging to work with because they take many days to get back to us with timely information when we ask."
+              ]
+            },
+            "risk_factors": {
+              "title": "Risk Factors",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "What potential concerns or risks should be addressed proactively?",
+              "default": [
+                "Budget impact of delay",
+                "Customer satisfaction risks",
+                "Team morale considerations"
+              ]
+            }
+          }
+        },
+        "urgency": {
+          "title": "Urgency",
+          "type": "object",
+          "properties": {
+            "level": {
+              "title": "Level",
+              "type": "string",
+              "enum": [
+                "Critical",
+                "Urgent",
+                "Important",
+                "Normal",
+                "Low Priority"
+              ],
+              "default": "Normal"
+            },
+            "deadline": {
+              "title": "Deadline",
+              "type": "string",
+              "default": null,
+              "format": "date-time"
+            },
+            "response_expectation": {
+              "title": "Response Expectation",
+              "type": "string",
+              "enum": [
+                "Immediate response needed",
+                "Response needed today",
+                "Response needed this week",
+                "For information only",
+                "No response needed"
+              ],
+              "default": "For information only"
+            }
+          }
+        }
+      }
+    },
+    "tone_and_style": {
+      "title": "Tone and Style",
+      "type": "object",
+      "properties": {
+        "formality_level": {
+          "type": "string",
+          "enum": ["Very Formal", "Professional", "Business Casual", "Casual"],
+          "default": "Professional"
+        },
+        "email_length_preference": {
+          "type": "string",
+          "enum": ["Very Brief", "Concise", "Detailed", "Comprehensive"],
+          "default": "Concise"
+        }
+      }
+    },
+    "output_instructions": {
+      "title": "Output Instructions",
+      "description": "Provide instructions for the AI assistant to best understand how to craft a message that will resonate with my boss.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Provide a well-structured email draft that matches my boss's preferences.",
+        "Use the specific tone, style, and language patterns that would appeal to my boss based on their profile",
+        "Include an attention-grabbing subject line that would interest my boss",
+        "Structure the email with appropriate sections (greeting, introduction, body, conclusion, call-to-action)",
+        "Incorporate any relevant terminology, metaphors, or framing approaches mentioned in my boss's profile",
+        "Keep the email concise and focused on what matters most to my boss",
+        "Include any necessary attachments or supporting materials",
+        "Suggest follow-up actions or next steps if appropriate"
+      ]
+    },
+    "refinement_instructions": {
+      "title": "Refinement Instructions",
+      "description": "Provide instructions for the AI assistant to best understand how to refine a message that will resonate with my boss.",
+      "type": "string",
+      "default": "If there are any questions that I can answer to help you provide a better response, please ask me.\nIf you feel you have enough information to provide a good response, please just provide the response."
+    }
+  }
+}
